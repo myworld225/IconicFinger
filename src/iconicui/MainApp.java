@@ -12,7 +12,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import iconicdata.Authenticator;
 import iconicdata.MyUser;
-import iconicdata.User;
 import javafx.stage.StageStyle;
 
 import java.io.InputStream;
@@ -33,7 +32,7 @@ public class MainApp extends Application {
     private Group root = new Group();
     private MyUser loggedUser; //log in 된 유저의 정보를 포함하고 있는 객체
 
-
+    public MyUser getLoggedUser(){ return loggedUser; }
 /*****************************************************************************
 * 실행 코드
 ******************************************************************************/
@@ -80,6 +79,7 @@ public class MainApp extends Application {
         try{
             MainMenuController mainMenu = (MainMenuController)replaceSceneContent("MainMenu.fxml");
             mainMenu.setApp(this);
+            mainMenu.setFriends(loggedUser.getId());
         } catch (Exception ex) {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
         }

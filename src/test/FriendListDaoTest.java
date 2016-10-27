@@ -21,7 +21,7 @@ public class FriendListDaoTest {
 	//적절한 예외를 발생시키는지에 대한 테스트
 	@Test(expected=SQLException.class)
 	public void add() throws ClassNotFoundException, SQLException{
-		friendListDao.add("mucky", "mucky");
+		friendListDao.add("robert", "mucky");
 	}
 //	@Test
 //	public void del(){

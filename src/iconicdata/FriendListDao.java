@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class FriendListDao {
 	private ConnectionMaker connectionMaker;
@@ -93,5 +96,30 @@ public class FriendListDao {
 		ps.close();
 		c.close();
 		return false;
+	}
+	
+	//해당 아이디의 친구 목록을 List<String> 타입으로 반환한다.이 메소드를 사용하는 곳에서는 예외처리 및 리스트의 길이가 0인 경우의 처리도 해야한다.
+	public List<String> getAllFriends(String userID) throws ClassNotFoundException, SQLException{
+		List<String> f_list = new ArrayList<>();
+		Connection c = connectionMaker.makeConnection();
+		PreparedStatement ps1 = c.prepareStatement("select * from friendlist where id1=?");
+		PreparedStatement ps2 = c.prepareStatement("select * from friendlist where id2=?");
+		ps1.setString(1, userID);
+		ps2.setString(1, userID);
+		ResultSet rs1 = ps1.executeQuery();
+		ResultSet rs2 = ps2.executeQuery();
+		while(rs1.next()){
+			f_list.add(rs1.getString("id2"));
+		}
+		while(rs2.next()){
+			f_list.add(rs2.getString("id1"));
+		}
+		rs2.close();
+		rs1.close();
+		ps2.close();
+		ps1.close();
+		c.close();
+		
+		return f_list;
 	}
 }

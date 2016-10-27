@@ -76,4 +76,22 @@ public class MyUserDao {
 			return false;
 		}
 	}
+	
+	//SignUpController에 쓰이는 회원 중복 확인 용 메소드(authenticate와 겹치는 부분이 있긴하다.)
+	public boolean dupCheck(String userId) throws SQLException, ClassNotFoundException{
+		
+		Connection c = connectionMaker.makeConnection();
+		
+		PreparedStatement ps = c.prepareStatement(
+				"select * from user where id=?");
+		ps.setString(1, userId);
+		ResultSet rs = ps.executeQuery();
+		if(rs.next()){
+			return false;
+		} else {
+			return true;
+		}
+		
+	}
+	
 }
