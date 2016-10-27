@@ -1,0 +1,122 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+
+#background {
+    -light-black: rgb(74, 75, 78);
+    -dark-highlight: rgb(87, 89, 92);
+    -dark-black: rgb(39, 40, 40);
+    -darkest-black: rgb(5, 5, 5);
+    -mid-gray: rgb(216, 222, 227);
+    -fx-background-color: rgb(216, 222, 227);
+}
+
+.tool-bar {
+    -fx-base: rgb(39, 40, 40);
+    -fx-font-size: 8pt;
+    -fx-background-color:
+        linear-gradient(to bottom, derive(-fx-base,-30%), derive(-fx-base,-60%)),
+        linear-gradient(to bottom, rgb(74, 75, 78) 2%, rgb(39, 40, 40) 98%);
+   /* -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: .9em 0.416667em .9em 0.416667em;*/
+    -fx-effect: dropshadow(two-pass-box,black,5,.2,0,0);
+}
+
+.segmented-button-bar .button {
+    -fx-background-color:
+        rgb(5, 5, 5),
+        rgb(87, 89, 92),
+        linear-gradient(to bottom, rgb(74, 75, 78) 2%, rgb(39, 40, 40) 98%);
+     -fx-background-insets: 0, 1 1 1 0, 2 1 1 1;
+    -fx-background-radius: 0;
+    /*  -fx-padding: 0.4em 1.833333em 0.4em 1.833333em; */
+}
+
+
+.segmented-button-bar .button.first {
+    -fx-background-insets: 0, 1, 2 1 1 1;
+    -fx-background-radius: 3 0 0 3, 2 0 0 2, 2 0 0 2;
+}
+ 
+.segmented-button-bar .button.last {
+    -fx-background-insets: 0, 1 1 1 0, 2 1 1 1;
+    -fx-background-radius: 0 3 3 0, 0 2 2 0, 0 2 2 0;
+}
+ 
+.segmented-button-bar .button:pressed {
+    -fx-background-color:
+        rgb(5, 5, 5),
+        rgb(55, 57, 58),
+        linear-gradient(to top, rgb(74, 75, 78) 2%, rgb(39, 40, 40) 98%);
+        
+}
+
+
+/************************************* tab css *************************************************/
+
+.tab-pane .tab-header-area .tab-header-background { /* 탭 버튼 백그라운드 */
+	 
+     -fx-background-color:
+        rgb(5, 5, 5),
+        rgb(87, 89, 92),
+        linear-gradient(to bottom, rgb(74, 75, 78) 2%, rgb(39, 40, 40) 98%);
+     -fx-background-insets: 0, 1 1 1 0, 2 1 1 1;
+    -fx-background-radius: 0;
+}
+
+.tab-pane
+{
+    -fx-tab-min-width:90px;
+}
+
+.tab{
+    -fx-background-insets: 0 1 0 1,0,0;
+}
+.tab-pane .tab
+{
+    -fx-background-color: rgb(5, 5, 5),#e6e6e6;
+    -fx-background-insets: 0, 1 1 1 0;
+    -fx-background-radius: 0;
+}
+
+.tab-pane .tab:selected
+{
+    -fx-background-color:
+        rgb(5, 5, 5),
+        rgb(87, 89, 92),
+        linear-gradient(to bottom, rgb(74, 75, 78) 2%, rgb(39, 40, 40) 98%);
+    /*  -fx-background-insets: 0, 1 1 1 0, 2 1 1 1;
+    -fx-background-radius: 0;
+    /*-fx-background-color: #3c3c3c;*/
+     
+}
+
+/* For remove the blue color in selected tap pane */
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+     -fx-border-style: segments(0,0);
+     -fx-border-width: 0;
+     -fx-border-color: rgb(5, 5, 5);
+}
+
+.tab .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: #828282;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: #96b946;
+}
+
+/* 탭 배경화면 */
+.tab-pane .tab-content-area {
+	-fx-background-color: 
+	linear-gradient(to bottom, rgb(74, 75, 78) 2%, rgb(39, 40, 40) 98%);
+}
+
+.tab-pane:top .tab-header-area {
+    -fx-background-insets: 0, 0 0 1 0;
+ /* -fx-padding: 0.416667em 0.166667em 0.0em 0.833em; /* 5 2 0 10 */
+    -fx-padding: 0.416667em 0.166667em 0.0em 0.0em; /* overriden as 5 2 0 0 */
+}

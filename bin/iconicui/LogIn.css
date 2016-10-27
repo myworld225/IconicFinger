@@ -1,0 +1,140 @@
+.top-segment{
+    -fx-background-image: url('../../img/login.png');
+}
+
+/*.button {*/
+
+    /*!*-fx-background-color:*!*/
+
+    /*!*rgba(255, 255, 255, 0.08),*!*/
+
+    /*!*rgba(0, 0, 0, 0.8),*!*/
+
+    /*!*#090a0c,*!*/
+
+    /*!*linear-gradient(#4a5661 0%, #1f2429 20%, #1f242a 100%),*!*/
+
+    /*!*linear-gradient(#242a2e, #23282e),*!*/
+
+    /*!*radial-gradient(center 50% 0%, radius 100%, rgba(135,142,148,0.9), rgba(255,255,255,0));*!*/
+    /*-fx-background-color: #AB4642;*/
+    /*!*-fx-background-radius: 7, 6, 5, 4, 3, 5;*!*/
+    /*-fx-background-radius:20;*/
+    /*-fx-background-insets: -3 -3 -4 -3, -3, 0, 1, 2, 0;*/
+
+    /*-fx-font-family: "Arial";*/
+
+    /*-fx-text-fill: white;*/
+
+    /*-fx-font-size: 26;*/
+
+    /*-fx-text-fill: linear-gradient(white, #d0d0d0);*/
+
+    /*-fx-padding: 10 20 10 20;*/
+
+/*}*/
+
+.login {
+    -fx-background-color: #AB4642;
+    -fx-background-radius:20;
+    -fx-background-insets: -3 -3 -4 -3, -3, 0, 1, 2, 0;
+
+    -fx-font-family: "Arial";
+
+    -fx-text-fill: white;
+
+    -fx-font-size: 26;
+
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+
+    -fx-padding: 10 20 10 20;
+
+}
+
+.signup {
+    -fx-background-color: #7CAFC2;
+    -fx-background-radius:20;
+    -fx-background-insets: -3 -3 -4 -3, -3, 0, 1, 2, 0;
+
+    -fx-font-family: "Arial";
+
+    -fx-text-fill: white;
+
+    -fx-font-size: 26;
+
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+
+    -fx-padding: 10 20 10 20;
+}
+
+
+
+/*.button:focused, .button:hover {*/
+
+/*-fx-background-color:*/
+
+/*rgba(255, 255, 255, 0.08),*/
+
+/*rgba(0, 0, 0, 0.8),*/
+
+/*#090a0c,*/
+
+/*linear-gradient(#4a5661 0%, #1f2429 20%, #1f242a 100%),*/
+
+/*linear-gradient(#3f4950, #23282e),*/
+
+/*radial-gradient(center 50% 0%, radius 100%, rgba(135,142,148,0.9), rgba(255,255,255,0));*/
+
+/*}*/
+
+.text-field{
+    -fx-background-radius: 10;
+}
+
+.password-field{
+    -fx-background-radius: 10;
+}
+
+
+#round-red{
+	-fx-background-color: linear-gradient(#ff5400, #be1d00);
+	-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+	-fx-padding: 5 5 5 5;
+    -fx-background-radius: 30;
+    
+    -fx-font-family: "Arial";
+    
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    
+}
+
+#round-red:hover{
+	-fx-background-color: linear-gradient(#ff5400, #eb7763);
+	
+}
+#round-red:pressed{
+	-fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #ff5400 0%, #eb7763 100%);
+        
+}
+
+#round-blue{
+	-fx-background-color: linear-gradient(#7CAFC2, #135d8a);
+	-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+	-fx-padding: 5 5 5 5;
+    -fx-background-radius: 30;
+    
+    -fx-font-family: "Arial";
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    
+}
+
+#round-blue:hover{
+	-fx-background-color: linear-gradient(#7CAFC2, #98c9e6);
+	
+}
+#round-blue:pressed{
+	-fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #7CAFC2 0%, #98c9e6 100%);
+        
+}

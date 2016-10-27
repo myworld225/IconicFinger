@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import java.net.URL?>
+
+<AnchorPane prefHeight="594.0" prefWidth="362.0" styleClass="top-segment" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iconicui.LoginController">
+      <children>
+          <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
+              <children>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                      <children>
+                          <Label layoutX="30.0" layoutY="15.0" text="Username" textFill="WHITE" />
+                          <TextField fx:id="userID" layoutX="14.0" layoutY="30.0" prefWidth="300.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+                          <Label layoutX="30.0" layoutY="75.0" text="Password" textFill="WHITE" />
+                          <PasswordField fx:id="password" layoutX="14.0" layoutY="90.0" onKeyPressed="#handleKeyPressed" prefWidth="300.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+                      </children>
+            </AnchorPane>
+              </children>
+          </VBox>
+          <Button id="round-red" fx:id="login" mnemonicParsing="false" onAction="#processLogin" prefHeight="35.0" prefWidth="300.0" text="Login" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+      <Button id="round-blue" fx:id="signUp" mnemonicParsing="false" onAction="#processSignUp" prefHeight="35.0" prefWidth="300.0" text="Sign Up" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+          <HBox alignment="CENTER" prefHeight="25.0" prefWidth="300.0" AnchorPane.bottomAnchor="156.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+              <children>
+                  <Label fx:id="errorMessage" />
+              </children>
+      </HBox>
+      </children>
+    <stylesheets>
+        <URL value="@LogIn.css" />
+    </stylesheets>
+  </AnchorPane>
