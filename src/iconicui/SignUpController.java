@@ -1,6 +1,8 @@
 package iconicui;
 
+import java.net.Inet4Address;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -131,7 +133,12 @@ public class SignUpController implements Initializable{
 		MyUser user = new MyUser();
 		user.setId(userID.getText());
 		user.setPassword(password.getText());
-		
+		try {
+			user.setIp(Inet4Address.getLocalHost().getHostAddress());
+		} catch (UnknownHostException e1) {
+			System.err.println("UnknownHostException");
+			e1.printStackTrace();
+		}
 		try {
 			dao.add(user);
 			System.out.println("added");

@@ -120,3 +120,27 @@
  /* -fx-padding: 0.416667em 0.166667em 0.0em 0.833em; /* 5 2 0 10 */
     -fx-padding: 0.416667em 0.166667em 0.0em 0.0em; /* overriden as 5 2 0 0 */
 }
+
+/* 슬라이드 메뉴용 css */
+.slide-anchor{
+	 -fx-background-color:
+        linear-gradient(to bottom, derive(-fx-base,-30%), derive(-fx-base,-60%)),
+        linear-gradient(to bottom, rgb(74, 75, 78) 2%, rgb(39, 40, 40) 98%);
+   /* -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: .9em 0.416667em .9em 0.416667em;*/
+    -fx-effect: dropshadow(two-pass-box,black,5,.2,0,0);
+}
+.slide-button{
+	 -fx-background-color:
+        rgb(5, 5, 5),
+        rgb(87, 89, 92),
+        linear-gradient(to bottom, rgb(74, 75, 78) 2%, rgb(39, 40, 40) 98%);
+     -fx-background-insets: 0, 1 1 1 0, 2 1 1 1;
+    -fx-background-radius: 0;
+}
+.slide-button:pressed{
+	-fx-background-color:
+        rgb(5, 5, 5),
+        rgb(55, 57, 58),
+        linear-gradient(to top, rgb(74, 75, 78) 2%, rgb(39, 40, 40) 98%);
+}

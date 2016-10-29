@@ -20,10 +20,10 @@
                   <Region prefHeight="40.0" prefWidth="4.0" />
                   <HBox prefHeight="16.0" prefWidth="324.0" styleClass="segmented-button-bar">
                      <children>
-                              <Button fx:id="option" mnemonicParsing="false" prefWidth="65.0" styleClass="first" text="OPTION" />
+                              <Button fx:id="option" mnemonicParsing="false" prefWidth="65.0" styleClass="first" text="LEAP" />
                               <Button fx:id="videoCall" mnemonicParsing="false" onAction="#videoCall" prefWidth="65.0" text="CALL" />
                               <Button mnemonicParsing="false" onAction="#addFriend" prefWidth="65.0" text="ADD" />
-                              <Button mnemonicParsing="false" prefWidth="64.0" text="DEL" />
+                              <Button mnemonicParsing="false" onAction="#delFriend" prefWidth="64.0" text="DEL" />
                               <Button mnemonicParsing="false" onAction="#logOut" prefWidth="65.0" styleClass="last" text="LOG OUT" />
                      </children>
                      <padding>
@@ -45,7 +45,7 @@
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="525.0" prefWidth="362.0" />
                             </content>
                         </Tab>
-                        <Tab text="친구">
+                        <Tab text="Friends">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="525.0" prefWidth="362.0">
                            <children>
@@ -57,41 +57,21 @@
                 </TabPane>
             </children>
         </VBox>
-        <AnchorPane fx:id="navList" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" translateX="-200.0" AnchorPane.topAnchor="40.0">
+        <AnchorPane fx:id="navList" prefHeight="200.0" prefWidth="220.0" style="-fx-background-color: white;" translateX="-220.0" AnchorPane.topAnchor="40.0">
             <children>
-                <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
-                    <children>
-                        <Label text="옵션1">
-                            <VBox.margin>
-                                <Insets left="80.0" />
-                            </VBox.margin>
-                        </Label>
-                        <ChoiceBox prefWidth="150.0">
-                            <VBox.margin>
-                                <Insets bottom="10.0" left="25.0" />
-                            </VBox.margin>
-                        </ChoiceBox>
-                        <Label text="옵션2">
-                            <VBox.margin>
-                                <Insets left="80.0" />
-                            </VBox.margin>
-                        </Label>
-                        <ChoiceBox prefWidth="150.0">
-                            <VBox.margin>
-                                <Insets bottom="10.0" left="25.0" />
-                            </VBox.margin>
-                        </ChoiceBox>
-                        <Label text="옵션3">
-                            <VBox.margin>
-                                <Insets left="80.0" />
-                            </VBox.margin>
-                        </Label>
-                        <ChoiceBox prefWidth="150.0">
-                            <VBox.margin>
-                                <Insets left="25.0" />
-                            </VBox.margin>
-                        </ChoiceBox>
-                    </children></VBox>
+                <VBox prefHeight="200.0" prefWidth="100.0" styleClass="slide-anchor" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Button mnemonicParsing="false" prefWidth="150.0" styleClass="slide-button" text="LEAP-A" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets bottom="80.0" left="35.0" top="30.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" prefWidth="150.0" styleClass="slide-button" text="LEAP-B" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets left="35.0" />
+                     </VBox.margin>
+                  </Button>
+               </children></VBox>
             </children>
         </AnchorPane>
     </children>

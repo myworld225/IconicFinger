@@ -38,7 +38,9 @@ public class FriendListDao {
 		ps.setString(1, big);
 		ps.setString(2, small);
 		ps.executeUpdate();
-
+		
+		System.out.println("("+ big + "," + small +")" + " added");
+		
 		ps.close();
 		c.close();
 	}
@@ -61,6 +63,8 @@ public class FriendListDao {
 		ps.setString(1, big);
 		ps.setString(2, small);
 		ps.executeUpdate();
+		
+		System.out.println("("+ big + "," + small +")" + " deleted");
 		
 		ps.close();
 		c.close();

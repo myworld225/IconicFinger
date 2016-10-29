@@ -65,7 +65,7 @@ public class LoginController implements Initializable{
     }
 
     @FXML
-    public void processSignUp(ActionEvent event){
+    public void processSignUp(){
     	
     	if(application == null){
     		System.out.println("시스템 오류의 경우(발생해서는 안되는 경우이다)");

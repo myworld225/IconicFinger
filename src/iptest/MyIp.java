@@ -10,7 +10,7 @@ import java.util.Enumeration;
 public class MyIp {
 	public static void main(String[] args) throws SocketException{
 		try {
-			System.out.println(Inet4Address.getLocalHost().getHostAddress());
+			System.out.println(Inet4Address.getLocalHost().getHostAddress().length());
 			System.out.println(InetAddress.getLocalHost().getHostAddress());
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block

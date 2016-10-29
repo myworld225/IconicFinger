@@ -1,0 +1,23 @@
+0. 각 dao의 crud operation에 print문 추가 --> 추후 주석처리
+1. user db에 ip항목 추가
+MyUser
+MyUserDao
+LogInController
+MainApp
+SignUpController
+로그인 과정에서의 ip주소 update는 MyUserDao.authenticate 를 수정한다. 그 외에는 add 에 추가하면 끝인듯???
+그리고 MyUserDao에 updateIp 메소드를 추가한다.
+
+authenticate ---> updateIp --> logIn complete
+
+
+위의 클래스를 수정해야한다. (수정 완료 ---- 테스트 중)
+
+
+
+
+2. ui 다듬기
+
+
+3. add, del, 오류다이얼로그 custom생성
+각 기능별로 controller, fxml, 파일 필요....

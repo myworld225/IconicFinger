@@ -14,7 +14,7 @@ public class MySqlConnectionMaker implements ConnectionMaker{
 	public Connection makeConnection() throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection connection = DriverManager.getConnection(
-				"jdbc:mysql://localhost:3306/mydb","root","1234");
+				"jdbc:mysql://localhost:3306/modeldb","root","qkrrl1223");
 		return connection;
 	}
 	

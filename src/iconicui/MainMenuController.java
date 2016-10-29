@@ -131,11 +131,37 @@ public class MainMenuController implements Initializable {
     	
     } // database update action + observable array edit
     
-    public void delFriend(){}
+    //ㅌㅔ 스트 필요
+    @FXML
+    public void delFriend(){
+    	
+    	Dialog dialog = new TextInputDialog();
+    	dialog.setTitle("DELFRIEND");
+    	dialog.setHeaderText("친구 이름 입력");
+    	
+    	FriendListDao fDao = new FriendListDao();
+    	fDao.setConnectionMaker(new MySqlConnectionMaker());
+    	
+    	Optional<String> result = dialog.showAndWait();
+    	if(result.isPresent()){
+    		if(items.contains(result.get())){
+    			try {
+						fDao.del(application.getLoggedUser().getId(), result.get());
+						items.remove(result.get());
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+    		}
+    	}
+    }
     
     @FXML
     public void logOut(){
     	application.logOutProcess();
     }
+    
+    //LEAP-A 및 LEAP-B를 위한 코드 필요
 
 }

@@ -15,10 +15,11 @@ public class AuthenticatorTest {
 	public void test() throws ClassNotFoundException, SQLException {
 		MyUser user = new MyUser();
 		
-		Authenticator.validate("mucky", "1234", user);
+		assertTrue(Authenticator.validate("mucky", "1234", user));
 		
 //		System.out.println(user==null);
 		System.out.println(user.getId());
+		System.out.println(user.getIp());
 //		assertTrue(user==null);
 		assertEquals("mucky",user.getId());
 		assertEquals("1234",user.getPassword());
