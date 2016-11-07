@@ -37,39 +37,39 @@ public class MainController implements Initializable{
 	//여기서 해야할것 == > 컨트롤러 객체를 획득한다 // set메소드로 list를 연결해준다. 끝난 후 리스트 처리된 결과를 반영한다.
 	@FXML
 	public void actionButton() throws IOException{
-		Stage primaryStage = (Stage) getDialog.getScene().getWindow();
-		//stage for dialog
-		Stage dialog = new Stage(StageStyle.UTILITY);
-		dialog.initModality(Modality.WINDOW_MODAL);
-		dialog.initOwner(primaryStage);
-		dialog.setTitle("확인");
-		
-		
-		
-		FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(MainController.class.getResource("inputdialog.fxml"));
-		
-//		dialogdd.getList(Arrays.asList("mucky","duck"));
-		
-//	Parent parent = FXMLLoader.load(getClass().getResource("inputdialog.fxml"));
-    Parent parent = loader.load();
-    DialogController dialogdd = (DialogController)loader.getController();
-    
-    dialogdd.getList(mylist);
-    System.out.println(dialogdd);
-	  dialog.initStyle(StageStyle.UNDECORATED);
-	  
-	  
-	  DraggableFactory.makeDraggable(dialog, parent);
-		Scene scene = new Scene(parent);
-//		dialogdd.makeDraggable((Stage)scene.getWindow());
-		
-		dialog.setScene(scene);
-		dialog.setResizable(false);
-		dialog.showAndWait();
-		for(String i: mylist){
-			System.out.println(i);
-		}
+//		Stage primaryStage = (Stage) getDialog.getScene().getWindow();
+//		//stage for dialog
+//		Stage dialog = new Stage(StageStyle.UTILITY);
+//		dialog.initModality(Modality.WINDOW_MODAL);
+//		dialog.initOwner(primaryStage);
+//		dialog.setTitle("확인");
+//		
+//		
+//		
+//		FXMLLoader loader = new FXMLLoader();
+//    loader.setLocation(MainController.class.getResource("inputdialog.fxml"));
+//		
+////		dialogdd.getList(Arrays.asList("mucky","duck"));
+//		
+////	Parent parent = FXMLLoader.load(getClass().getResource("inputdialog.fxml"));
+//    Parent parent = loader.load();
+//    DialogController dialogdd = (DialogController)loader.getController();
+//    
+////    dialogdd.setList(mylist);
+//    System.out.println(dialogdd);
+//	  dialog.initStyle(StageStyle.UNDECORATED);
+//	  
+//	  
+//	  DraggableFactory.makeDraggable(dialog, parent);
+//		Scene scene = new Scene(parent);
+////		dialogdd.makeDraggable((Stage)scene.getWindow());
+//		
+//		dialog.setScene(scene);
+//		dialog.setResizable(false);
+//		dialog.showAndWait();
+//		for(String i: mylist){
+//			System.out.println(i);
+//		}
 	}
 
 

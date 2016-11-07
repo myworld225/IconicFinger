@@ -1,23 +1,19 @@
 package customdialog;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-//import customdialog.FrostyTech.Delta;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import iconicdata.FriendListDao;
+import iconicdata.MySqlConnectionMaker;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
 import javafx.scene.control.Button;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class DialogController implements Initializable{
 	
@@ -30,8 +26,8 @@ public class DialogController implements Initializable{
 	@FXML
 	AnchorPane dragable;
 	
-	
-	private List<String> mylist;
+	private String userName;//사용자의 아이디
+	private ObservableList<String> mylist;
 	
 	@FXML
 	public void cancelButton(){
@@ -43,8 +39,42 @@ public class DialogController implements Initializable{
 		pStage.close();
 	}
 	
-	public void getList(List<String> mylist){
+	//일단 add용만 먼저 만들어 두자.
+	@FXML
+	public void actionButton(){
+		Stage pStage = (Stage) cancel.getScene().getWindow();
+		
+		if(text.getText() != ""){
+			String fid = text.getText();
+			FriendListDao f_dao = new FriendListDao();
+			f_dao.setConnectionMaker(new MySqlConnectionMaker());
+			
+			try {//여기도 오류시 팝업을 생성하도록 하자... 팝업생성클래스 참조
+				f_dao.add(userName, fid);
+				//if success update observable list
+				mylist.add("fid");
+				//창을 닫고 성공 팝업메시지를 띄우자 느낌표 아이콘 필요
+				
+			} catch (ClassNotFoundException e) {
+				// 실패 메시지 팝업 (x 아이콘)
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		pStage.close();
+	}
+	
+	
+	//MainMenuController에서 ObservableList획득
+	public void setList(ObservableList<String> mylist){
 		this.mylist = mylist;
+	}
+	//username setter
+	public void setName(String name){
+		this.userName = name;
 	}
 	
 	public void printList(){

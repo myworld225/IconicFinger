@@ -9,6 +9,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import iconicdata.Authenticator;
@@ -44,6 +45,10 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
     		window = primaryStage;
+    		
+    		Image image = new Image("file:../../img/ud.png");
+    		primaryStage.getIcons().addAll(image);
+    		
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(createContent(), 352, 584));//362 594 사이즈를 실제보다 약간 줄여서 보기좋게 하였다.
