@@ -12,9 +12,12 @@ public class TestDialog extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		
 		Parent parent = FXMLLoader.load(getClass().getResource("main.fxml"));
 		
+		DraggableFactory.makeDraggable(primaryStage, parent);
 		Scene scene = new Scene(parent);
+		primaryStage.initStyle(StageStyle.TRANSPARENT);
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();

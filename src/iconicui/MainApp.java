@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -19,6 +20,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import customdialog.DraggableFactory;
+
 
 /**
  * Created by user on 2016-09-25.
@@ -27,7 +30,9 @@ import java.util.logging.Logger;
 
 
 public class MainApp extends Application {
-
+		
+		//11-6
+		
     private Stage window;
     private Group root = new Group();
     private MyUser loggedUser; //log in 된 유저의 정보를 포함하고 있는 객체
@@ -38,10 +43,14 @@ public class MainApp extends Application {
 ******************************************************************************/
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-        //primaryStage.initStyle(StageStyle.UNDECORATED);
+    		window = primaryStage;
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(createContent(), 352, 584));//362 594 사이즈를 실제보다 약간 줄여서 보기좋게 하였다.
+        
+        //dragable?
+//        DragableFactory.makeDraggable(primaryStage, root);
+        
         primaryStage.show();
 
     }
@@ -104,16 +113,18 @@ public class MainApp extends Application {
         loader.setBuilderFactory(new JavaFXBuilderFactory());
         loader.setLocation(MainApp.class.getResource(fxml));
 
-        AnchorPane page;
+        Node page;
 
         try {
-            page = (AnchorPane) loader.load(in);
+            page =  (Node)loader.load(in);
         } finally {
             in.close();
         }
 
         root.getChildren().removeAll();
         root.getChildren().addAll(page);
+        //11-6 DragableFactory
+        DraggableFactory.makeDraggable(window, root);
         return (Initializable) loader.getController(); //fxml 파일의 controller 반환
     }
 

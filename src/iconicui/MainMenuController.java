@@ -1,6 +1,7 @@
 package iconicui;
 
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,6 +11,8 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -26,7 +29,11 @@ import iconicdata.MySqlConnectionMaker;
  * 추가해야 할 것들 : 각 버튼에대한 행동처리 대부분은 MainApp에서 처리하게 된다.(위임?)
  */
 public class MainMenuController implements Initializable {
-
+		
+		@FXML
+		private Button close;
+		@FXML
+		private Button minimize;
     @FXML
     private Button option;
     @FXML
@@ -160,6 +167,40 @@ public class MainMenuController implements Initializable {
     @FXML
     public void logOut(){
     	application.logOutProcess();
+    }
+    
+  //11-06
+    //close and minimize button function.
+    @FXML
+    public void close() {
+      final Stage stage = (Stage)close.getScene().getWindow();
+      Platform.runLater(new Runnable() {
+          @Override
+          public void run() {
+              stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+          }
+      });
+
+    }
+    @FXML
+    public void minimize() {
+
+      if (!Platform.isFxApplicationThread()) // Ensure on correct thread else hangs X under Unbuntu
+      {
+          Platform.runLater(new Runnable() {
+              @Override
+              public void run() {
+                  _minimize();
+              }
+          });
+      } else {
+          _minimize();
+      }
+    }
+
+    private void _minimize() {
+      Stage stage = (Stage)minimize.getScene().getWindow();
+      stage.setIconified(true);
     }
     
     //LEAP-A 및 LEAP-B를 위한 코드 필요

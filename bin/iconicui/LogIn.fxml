@@ -32,6 +32,8 @@
                   <Label fx:id="errorMessage" />
               </children>
       </HBox>
+      <Button id="decoration-button-minimize" fx:id="minimize" layoutX="248.0" mnemonicParsing="false" onAction="#minimize" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="2.0" />
+      <Button id="decoration-button-close" fx:id="close" layoutX="305.0" mnemonicParsing="false" onAction="#close" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="2.0" />
       </children>
     <stylesheets>
         <URL value="@LogIn.css" />

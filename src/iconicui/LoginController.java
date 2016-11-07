@@ -1,8 +1,11 @@
 package iconicui;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -11,12 +14,18 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import customdialog.ErrorPopup;
+
 /**
- * Created by user on 2016-09-25.
+ * 11/06 undecorator 세팅
  */
 public class LoginController implements Initializable{
 
@@ -30,6 +39,11 @@ public class LoginController implements Initializable{
     Button signUp;
     @FXML
     Label errorMessage;
+    //11-06
+    @FXML
+    Button minimize;
+    @FXML
+    Button close;
 
     private MainApp application;
 
@@ -55,10 +69,15 @@ public class LoginController implements Initializable{
             //MainApp 클래스에서 LoginController 클래스의 userID 와 password 를 갖고 db연결을 통해 비교하여 연결이 올바른지 파악 후 처리
             if(!application.userLogging(userID.getText(), password.getText())){
                 //error 오류 다이얼로그 생성
-            	Alert alert = new Alert(AlertType.ERROR);
-            	alert.setTitle("로그인 오류");
-            	alert.setHeaderText("oops!");
-            	alert.showAndWait();
+//            	Alert alert = new Alert(AlertType.ERROR);
+//            	alert.setTitle("로그인 오류");
+//            	alert.setHeaderText("oops!");
+//            	alert.showAndWait();
+            	//대신 오류 팝업
+            	Stage primaryStage = (Stage) login.getScene().getWindow();
+          		
+          		ErrorPopup.showPopup(primaryStage, "로그인 오류");
+          	
             }
         }
 
@@ -80,4 +99,42 @@ public class LoginController implements Initializable{
 	        processLogin();
 	    }
 	}
+    
+    
+    //11-06
+    //close and minimize button function.
+    @FXML
+    public void close() {
+      final Stage stage = (Stage)close.getScene().getWindow();
+      Platform.runLater(new Runnable() {
+          @Override
+          public void run() {
+              stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+          }
+      });
+
+    }
+    @FXML
+    public void minimize() {
+
+      if (!Platform.isFxApplicationThread()) // Ensure on correct thread else hangs X under Unbuntu
+      {
+          Platform.runLater(new Runnable() {
+              @Override
+              public void run() {
+                  _minimize();
+              }
+          });
+      } else {
+          _minimize();
+      }
+    }
+
+    private void _minimize() {
+      Stage stage = (Stage)minimize.getScene().getWindow();
+      stage.setIconified(true);
+    }
+    
+  
+ 
 }

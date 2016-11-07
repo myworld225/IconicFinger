@@ -1,16 +1,21 @@
 package iconicui;
 
+import java.io.IOException;
 import java.net.Inet4Address;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import customdialog.ErrorPopup;
 import iconicdata.MySqlConnectionMaker;
 import iconicdata.MyUser;
 import iconicdata.MyUserDao;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,9 +25,16 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class SignUpController implements Initializable{
-
+	//11-06
+	@FXML
+	Button close;
+	@FXML
+	Button minimize;
 	@FXML
     TextField userID;
     @FXML
@@ -119,10 +131,10 @@ public class SignUpController implements Initializable{
 		//성공 -> 로그인 화면 / 실패 -> 그대로(팝업창에 뭐가 오류인지 밝힌다)
 		if((pwCheck.getText()!="checked") || (dupCheck.getText() != "checked")){
 			//error dialog(다이얼로그는 추후 custom dialog로 변경 가능 )
-			Alert alert = new Alert(AlertType.ERROR);
-        	alert.setTitle("회원등록 오류");
-        	alert.setHeaderText("회원중복 또는 비밀번호 체크 확인!");
-        	alert.showAndWait();
+			Stage primaryStage = (Stage) close.getScene().getWindow();
+  		
+			ErrorPopup.showPopup(primaryStage, "유효하지 않은 입력입니다");
+  		
 			return;
 		}
 		
@@ -145,10 +157,9 @@ public class SignUpController implements Initializable{
 			application.insertUser();
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
-			Alert alert = new Alert(AlertType.ERROR);
-        	alert.setTitle("회원등록 오류");
-        	alert.setHeaderText(e.getMessage());
-        	alert.showAndWait();
+			Stage primaryStage = (Stage) close.getScene().getWindow();
+  		
+  		ErrorPopup.showPopup(primaryStage, "회원등록 오류");
 			dao = null;
 //			e.printStackTrace();
 		}
@@ -162,4 +173,39 @@ public class SignUpController implements Initializable{
 		//그냥 백
 		application.insertUser();
 	}
+	
+//11-06
+  //close and minimize button function.
+  @FXML
+  public void close() {
+    final Stage stage = (Stage)close.getScene().getWindow();
+    Platform.runLater(new Runnable() {
+        @Override
+        public void run() {
+            stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+        }
+    });
+
+  }
+  @FXML
+  public void minimize() {
+
+    if (!Platform.isFxApplicationThread()) // Ensure on correct thread else hangs X under Unbuntu
+    {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                _minimize();
+            }
+        });
+    } else {
+        _minimize();
+    }
+  }
+
+  private void _minimize() {
+    Stage stage = (Stage)minimize.getScene().getWindow();
+    stage.setIconified(true);
+  }
+  
 }

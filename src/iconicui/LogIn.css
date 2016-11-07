@@ -138,3 +138,35 @@
         linear-gradient(from 0% 93% to 0% 100%, #7CAFC2 0%, #98c9e6 100%);
         
 }
+
+/*
+*	Minimize button
+*/
+#decoration-button-minimize{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image:url("../../img/minimize.png");
+    -fx-background-repeat:no-repeat;
+}
+
+#decoration-button-minimize:hover{
+    -fx-background-color: null;
+    -fx-background-image:url("../../img/minimize-hover.png");
+    -fx-background-repeat:no-repeat;
+}
+/*
+*	Close button
+*/
+#decoration-button-close{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image:url("../../img/close.png");
+    -fx-background-repeat:no-repeat;
+}
+#decoration-button-close:hover{
+    -fx-background-color: null;
+    -fx-background-image:url("../../img/close-hover.png");
+    -fx-background-repeat:no-repeat;
+}
