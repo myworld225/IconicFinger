@@ -12,6 +12,7 @@ public class DraggableFactory {
 	private static class Delta {
     double x, y;
 	}
+	//해당 스테이지와 최상위 노드를 받아서 draggable로 만든다.
 	public static void makeDraggable(Stage stage, Node dragable) {
 		// Stage stage = (Stage) cancel.getScene().getWindow();
 

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="dragable" prefHeight="131.0" prefWidth="206.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customdialog.DialogController">
+   <children>
+      <AnchorPane layoutX="3.0" layoutY="3.0" prefHeight="125.0" prefWidth="200.0" stylesheets="@inputdialog.css">
+         <children>
+            <VBox prefHeight="125.0" prefWidth="200.0">
+               <children>
+                  <AnchorPane prefHeight="25.0" prefWidth="200.0" styleClass="slide-anchor">
+                     <children>
+                        <Label text="InputDialog" textFill="#fffefe" AnchorPane.bottomAnchor="2.5" AnchorPane.leftAnchor="57.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="2.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="60.0" prefWidth="200.0" styleClass="slide-anchor">
+                     <children>
+                        <TextField fx:id="text" layoutX="20.0" layoutY="16.0" prefHeight="29.0" prefWidth="86.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="16.0">
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" top="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                  </AnchorPane>
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" styleClass="slide-anchor">
+                     <children>
+                        <Button fx:id="ok" mnemonicParsing="false" onAction="#actionButton" prefWidth="80.0" styleClass="slide-button" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets bottom="1.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancelButton" prefWidth="80.0" styleClass="slide-button" text="Cancel" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets bottom="1.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

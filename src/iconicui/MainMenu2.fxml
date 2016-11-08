@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import java.net.URL?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="368.0" styleClass="slide-anchor" stylesheets="@MainMenu.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iconicui.MainMenuController">
+   <children>
+      <AnchorPane layoutX="6.0" layoutY="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="594.0" prefWidth="362.0" styleClass="top-segment" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0">
+          <children>
+              <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <children>
+                  <AnchorPane prefHeight="25.0" style="-fx-background-color: white;">
+                     <children>
+                        <Button id="decoration-button-close" fx:id="close" layoutX="296.0" layoutY="-6.0" mnemonicParsing="false" onAction="#close" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
+                        <Button id="decoration-button-minimize" fx:id="minimize" layoutX="254.0" layoutY="-6.0" mnemonicParsing="false" onAction="#minimize" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="0.0" />
+                        <Label layoutX="14.0" layoutY="8.0" text="IconicFinger" />
+                     </children>
+                  </AnchorPane>
+                      <ToolBar prefHeight="40.0" prefWidth="200.0">
+                          <items>
+                        <Region prefHeight="40.0" prefWidth="4.0" />
+                        <HBox prefHeight="16.0" prefWidth="324.0" styleClass="segmented-button-bar">
+                           <children>
+                                    <Button fx:id="option" mnemonicParsing="false" prefWidth="65.0" styleClass="first" text="LEAP" />
+                                    <Button fx:id="videoCall" mnemonicParsing="false" onAction="#videoCall" prefWidth="65.0" text="CALL" />
+                                    <Button mnemonicParsing="false" onAction="#addFriend" prefWidth="65.0" text="ADD" />
+                                    <Button mnemonicParsing="false" onAction="#delFriend" prefWidth="64.0" text="DEL" />
+                                    <Button mnemonicParsing="false" onAction="#logOut" prefWidth="65.0" styleClass="last" text="LOG OUT" />
+                           </children>
+                           <padding>
+                              <Insets top="8.0" />
+                           </padding>
+                        </HBox>
+                          </items>
+                          <VBox.margin>
+                              <Insets />
+                          </VBox.margin>
+                          <padding>
+                              <Insets left="12.0" />
+                          </padding>
+                      </ToolBar>
+                      <TabPane prefHeight="529.0" prefWidth="362.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                              <Tab text="Main">
+                                  <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="525.0" prefWidth="362.0" />
+                                  </content>
+                              </Tab>
+                              <Tab text="Friends">
+                                  <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="525.0" prefWidth="362.0">
+                                 <children>
+                                    <ListView fx:id="friendlist" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0" />
+                                 </children>
+                              </AnchorPane>
+                                  </content>
+                              </Tab>
+                          </tabs>
+                      </TabPane>
+                  </children>
+              </VBox>
+          </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
+        <AnchorPane fx:id="navList" prefHeight="200.0" prefWidth="220.0" style="-fx-background-color: white;" translateX="-223.0" translateY="77.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <VBox prefHeight="200.0" prefWidth="100.0" styleClass="slide-anchor" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Button mnemonicParsing="false" prefWidth="150.0" styleClass="slide-button" text="LEAP-A" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets bottom="80.0" left="35.0" top="30.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" prefWidth="150.0" styleClass="slide-button" text="LEAP-B" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets left="35.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            </children>
+        </AnchorPane>
+   </children>
+</AnchorPane>

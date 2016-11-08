@@ -15,8 +15,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class DialogController implements Initializable{
-	
+public class DialogController implements Initializable {
+
 	@FXML
 	TextField text;
 	@FXML
@@ -25,60 +25,81 @@ public class DialogController implements Initializable{
 	Button cancel;
 	@FXML
 	AnchorPane dragable;
-	
-	private String userName;//사용자의 아이디
+
+	private String userName;// 사용자의 아이디
 	private ObservableList<String> mylist;
-	
+	private Stage parentStage;
+
 	@FXML
-	public void cancelButton(){
-		System.out.println(mylist);
-		printList();
-		mylist.add("hello");
-//		mylist.clear();
+	public void cancelButton() {// close the dialog.
 		Stage pStage = (Stage) cancel.getScene().getWindow();
 		pStage.close();
 	}
-	
-	//일단 add용만 먼저 만들어 두자.
+
+	// 일단 add용만 먼저 만들어 두자.
 	@FXML
-	public void actionButton(){
+	public void actionButton() {
 		Stage pStage = (Stage) cancel.getScene().getWindow();
-		
-		if(text.getText() != ""){
+		System.out.println(text.getText().isEmpty());// true when textfield is empty
+		System.out.println(text.getText() == null);// usually false
+		if (!(text.getText() == null || text.getText().trim().isEmpty())) {
 			String fid = text.getText();
 			FriendListDao f_dao = new FriendListDao();
 			f_dao.setConnectionMaker(new MySqlConnectionMaker());
-			
-			try {//여기도 오류시 팝업을 생성하도록 하자... 팝업생성클래스 참조
-				f_dao.add(userName, fid);
-				//if success update observable list
-				mylist.add("fid");
-				//창을 닫고 성공 팝업메시지를 띄우자 느낌표 아이콘 필요
-				
+
+			try {// 여기도 오류시 팝업을 생성하도록 하자... 팝업생성클래스 참조
+				if (ok.getText() == "Add") {
+					f_dao.add(userName, fid);
+					// if success update observable list
+					mylist.add(fid);
+					System.out.println("added!");// notification
+				} else if (ok.getText() == "Del") {
+					f_dao.del(userName, fid);
+
+					if (mylist.contains(fid)) {
+						mylist.remove(fid);
+						System.out.println("deleted!");
+					}
+				}
+
+				// 창을 닫고 성공 팝업메시지를 띄우자 느낌표 아이콘 필요
 			} catch (ClassNotFoundException e) {
 				// 실패 메시지 팝업 (x 아이콘)
+				System.out.println("ClassNotFoundException");
+				ErrorPopup.showPopup(pStage, "ClassNotFound");
 				e.printStackTrace();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
+				System.out.println("SQLException");
+				ErrorPopup.showPopup(pStage, "잘못된 만남");
 				e.printStackTrace();
 			}
 		}
-		
-		pStage.close();
+		text.setText("");
+		// pStage.close();
 	}
-	
-	
-	//MainMenuController에서 ObservableList획득
-	public void setList(ObservableList<String> mylist){
+
+	// MainMenuController에서 ObservableList획득
+	public void setList(ObservableList<String> mylist) {
 		this.mylist = mylist;
 	}
-	//username setter
-	public void setName(String name){
+
+	// username setter
+	public void setUserName(String name) {
 		this.userName = name;
 	}
-	
-	public void printList(){
-		for(String i : mylist){
+
+	public void setParentStage(Stage stage) {
+		this.parentStage = stage;
+	}
+
+	// for toggle
+	public void setButtonText(String text) {
+		ok.setText(text);
+	}
+
+	public void printList() {
+		for (String i : mylist) {
 			System.out.println(i);
 		}
 	}
@@ -86,9 +107,9 @@ public class DialogController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		//현재 UI의 stage를 갖고온다.
-		//이걸 따로 메소드로 만들고 밖에서 호출해서 세팅하자... show전에...
-		
+		// 현재 UI의 stage를 갖고온다.
+		// 이걸 따로 메소드로 만들고 밖에서 호출해서 세팅하자... show전에...
+
 	}
-	
+
 }

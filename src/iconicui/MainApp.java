@@ -51,7 +51,7 @@ public class MainApp extends Application {
     		
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setResizable(false);
-        primaryStage.setScene(new Scene(createContent(), 352, 584));//362 594 사이즈를 실제보다 약간 줄여서 보기좋게 하였다.
+        primaryStage.setScene(new Scene(createContent(), 368, 600));//362 594 사이즈를 실제보다 약간 줄여서 보기좋게 하였다.
         
         //dragable?
 //        DragableFactory.makeDraggable(primaryStage, root);
@@ -80,7 +80,7 @@ public class MainApp extends Application {
     private void gotoLogin(){
 
         try {
-            LoginController login = (LoginController)replaceSceneContent("LogIn.fxml");
+            LoginController login = (LoginController)replaceSceneContent("LogIn2.fxml");
             login.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
@@ -91,7 +91,7 @@ public class MainApp extends Application {
     private void gotoMainMenu(){
 
         try{
-            MainMenuController mainMenu = (MainMenuController)replaceSceneContent("MainMenu.fxml");
+            MainMenuController mainMenu = (MainMenuController)replaceSceneContent("MainMenu2.fxml");
             mainMenu.setApp(this);
             mainMenu.setFriends(loggedUser.getId());
         } catch (Exception ex) {
@@ -103,7 +103,7 @@ public class MainApp extends Application {
     private void gotoSignUp(){
     	
     	try{
-    		SignUpController signUp = (SignUpController)replaceSceneContent("SignUp.fxml");
+    		SignUpController signUp = (SignUpController)replaceSceneContent("SignUp2.fxml");
     		signUp.setApp(this);
     	} catch(Exception ex) {
     		Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE,null,ex);
