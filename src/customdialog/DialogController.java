@@ -33,7 +33,8 @@ public class DialogController implements Initializable {
 	@FXML
 	public void cancelButton() {// close the dialog.
 		Stage pStage = (Stage) cancel.getScene().getWindow();
-		pStage.close();
+		text.setText("");
+		pStage.hide();
 	}
 
 	// 일단 add용만 먼저 만들어 두자.
@@ -109,7 +110,7 @@ public class DialogController implements Initializable {
 		// TODO Auto-generated method stub
 		// 현재 UI의 stage를 갖고온다.
 		// 이걸 따로 메소드로 만들고 밖에서 호출해서 세팅하자... show전에...
-
+		text.setPromptText("userID");
 	}
 
 }

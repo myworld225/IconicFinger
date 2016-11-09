@@ -4,30 +4,29 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import customdialog.DialogController;
 import customdialog.DraggableFactory;
-import customdialog.MainController;
 import iconicdata.FriendListDao;
 import iconicdata.MySqlConnectionMaker;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -56,7 +55,9 @@ public class MainMenuController implements Initializable {
     private MainApp application;
     
     private ObservableList<String> items;//for friendlist
-
+    
+    private Stage _inputAddDialog = null;//for createDialog
+    private Stage _inputDelDialog = null;
     public void setApp(MainApp application){
 
         this.application = application;
@@ -121,72 +122,101 @@ public class MainMenuController implements Initializable {
     	System.out.println("Hello World!");
     }
     
-    @FXML
-    public void addFriend(){
-    	//내 스테이지를 얻고, 이것을 owner로 하는 stage생성
-    	Stage myStage = (Stage)close.getScene().getWindow();
-    	Stage dialogStage = new Stage(StageStyle.UNDECORATED);
-    	dialogStage.initModality(Modality.WINDOW_MODAL);
-    	dialogStage.initOwner(myStage);
-    	
-    	FXMLLoader loader = new FXMLLoader();
-    	loader.setLocation(MainController.class.getResource("../customdialog/blackinputdialog.fxml"));
-    	try {
-				Parent parent = loader.load();
-				//DialogController로 내부에서 필요한 정보인 observablelist의 레퍼런스와 userid/name 을 획득한다.
-				DialogController dialogController = (DialogController)loader.getController();
-				dialogController.setParentStage(myStage);
-				dialogController.setList(items);
-				dialogController.setUserName(application.getLoggedUser().getId());
-				dialogController.setButtonText("Add");
-				DraggableFactory.makeDraggable(dialogStage, parent);
-				
-				
-				Scene scene = new Scene(parent);
-				dialogStage.setScene(scene);
-				dialogStage.setResizable(false);
-				dialogStage.showAndWait();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    	
-    	
-    	
-    } // database update action + observable array edit
     
-    //ㅌㅔ 스트 필요
+    //new version add friend()
     @FXML
-    public void delFriend(){
-    //내 스테이지를 얻고, 이것을 owner로 하는 stage생성
+    public void addFriend2(){
     	Stage myStage = (Stage)close.getScene().getWindow();
-    	Stage dialogStage = new Stage(StageStyle.UNDECORATED);
-    	dialogStage.initModality(Modality.WINDOW_MODAL);
-    	dialogStage.initOwner(myStage);
-    	
-    	FXMLLoader loader = new FXMLLoader();
-    	loader.setLocation(MainController.class.getResource("../customdialog/blackinputdialog.fxml"));
-    	try {
-				Parent parent = loader.load();
-				//DialogController로 내부에서 필요한 정보인 observablelist의 레퍼런스와 userid/name 을 획득한다.
-				DialogController dialogController = (DialogController)loader.getController();
-				dialogController.setParentStage(myStage);
-				dialogController.setList(items);
-				dialogController.setUserName(application.getLoggedUser().getId());
-				dialogController.setButtonText("Del");
-				DraggableFactory.makeDraggable(dialogStage, parent);
-				
-				
-				Scene scene = new Scene(parent);
-				
-				dialogStage.setScene(scene);
-				dialogStage.setResizable(false);
-				dialogStage.showAndWait();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+    	final Stage dialog = createDialog(myStage,FunctionType.ADD);
+    	dialog.show();// 엄청 짧아 졌네...
     }
+    @FXML
+    public void delFriend2(){
+    	Stage myStage = (Stage)close.getScene().getWindow();
+    	final Stage dialog = createDialog(myStage,FunctionType.DEL);
+    	dialog.show();
+    }
+    
+//    @FXML
+//    public void addFriend(){
+//    	//내 스테이지를 얻고, 이것을 owner로 하는 stage생성
+//    	Stage myStage = (Stage)close.getScene().getWindow();
+//    	Stage dialogStage = new Stage(StageStyle.UNDECORATED);
+//    	dialogStage.initModality(Modality.WINDOW_MODAL);
+//    	dialogStage.initOwner(myStage);
+//    	
+//    	FXMLLoader loader = new FXMLLoader();
+//    	loader.setLocation(MainController.class.getResource("../customdialog/blackinputdialog.fxml"));
+//    	try {
+//				Parent parent = loader.load();
+//				//DialogController로 내부에서 필요한 정보인 observablelist의 레퍼런스와 userid/name 을 획득한다.
+//				DialogController dialogController = (DialogController)loader.getController();
+//				dialogController.setParentStage(myStage);
+//				dialogController.setList(items);
+//				dialogController.setUserName(application.getLoggedUser().getId());
+//				dialogController.setButtonText("Add");
+//				DraggableFactory.makeDraggable(dialogStage, parent);
+//				
+//				
+//				Scene scene = new Scene(parent);
+//				dialogStage.setScene(scene);
+//				dialogStage.setResizable(false);
+//				
+//				//좌표생성 코드
+//				//Desired x coordinate for centered dialog
+//				final DoubleProperty x = new SimpleDoubleProperty();
+//				x.bind(myStage.xProperty().add(
+//						myStage.widthProperty().subtract(dialogStage.widthProperty()).divide(2)));
+//				//Desired y coordinate for centered dialog
+//				final DoubleProperty y = new SimpleDoubleProperty();
+//				y.bind(myStage.yProperty().add(
+//						myStage.widthProperty().subtract(dialogStage.widthProperty()).divide(2)));
+//				
+//				
+//				
+//				//
+//				dialogStage.showAndWait();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//    	
+//    	
+//    	
+//    } // database update action + observable array edit
+//    
+//    //ㅌㅔ 스트 필요
+//    @FXML
+//    public void delFriend(){
+//    //내 스테이지를 얻고, 이것을 owner로 하는 stage생성
+//    	Stage myStage = (Stage)close.getScene().getWindow();
+//    	Stage dialogStage = new Stage(StageStyle.UNDECORATED);
+//    	dialogStage.initModality(Modality.WINDOW_MODAL);
+//    	dialogStage.initOwner(myStage);
+//    	
+//    	FXMLLoader loader = new FXMLLoader();
+//    	loader.setLocation(MainController.class.getResource("../customdialog/blackinputdialog.fxml"));
+//    	try {
+//				Parent parent = loader.load();
+//				//DialogController로 내부에서 필요한 정보인 observablelist의 레퍼런스와 userid/name 을 획득한다.
+//				DialogController dialogController = (DialogController)loader.getController();
+//				dialogController.setParentStage(myStage);
+//				dialogController.setList(items);
+//				dialogController.setUserName(application.getLoggedUser().getId());
+//				dialogController.setButtonText("Del");
+//				DraggableFactory.makeDraggable(dialogStage, parent);
+//				
+//				
+//				Scene scene = new Scene(parent);
+//				
+//				dialogStage.setScene(scene);
+//				dialogStage.setResizable(false);
+//				dialogStage.showAndWait();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//    }
     
     @FXML
     public void logOut(){
@@ -225,6 +255,110 @@ public class MainMenuController implements Initializable {
     private void _minimize() {
       Stage stage = (Stage)minimize.getScene().getWindow();
       stage.setIconified(true);
+    }
+    
+    
+    //Create Dialog for ADD & DEL
+    //클래스 변수를 사용하면 반환이 필요 없을 수 도 있을듯
+    private Stage createDialog(final Stage parentStage, FunctionType type){
+    	if((type == FunctionType.ADD) && (_inputAddDialog != null)){
+    		return _inputAddDialog;
+    	} else if ((type == FunctionType.DEL) && (_inputDelDialog != null)){
+    		return _inputDelDialog;
+    	}
+    	
+    	final Stage inputDialog = new Stage(StageStyle.UNDECORATED);
+    	inputDialog.initOwner(parentStage);
+    	inputDialog.initModality(Modality.WINDOW_MODAL);
+    	
+    	//수정이 필요한 코드
+    	FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(DialogController.class.getResource("../customdialog/blackinputdialog.fxml"));
+    	try {
+				Parent parent = loader.load();
+				//DialogController로 내부에서 필요한 정보인 observablelist의 레퍼런스와 userid/name 을 획득한다.
+				DialogController dialogController = (DialogController)loader.getController();
+				dialogController.setParentStage(parentStage);
+				dialogController.setList(items);
+				dialogController.setUserName(application.getLoggedUser().getId());
+				if (type == FunctionType.ADD)
+					dialogController.setButtonText("Add");
+				else if (type == FunctionType.DEL)
+					dialogController.setButtonText("Del");
+				DraggableFactory.makeDraggable(inputDialog, parent);
+				
+				
+				Scene scene = new Scene(parent);
+				inputDialog.setScene(scene);
+				inputDialog.setResizable(false);
+				
+				//좌표생성 코드
+				//Desired x coordinate for centered dialog
+				final DoubleProperty x = new SimpleDoubleProperty();
+				x.bind(parentStage.xProperty().add(
+						parentStage.widthProperty().subtract(inputDialog.widthProperty()).divide(2)));
+				//Desired y coordinate for centered dialog
+				final DoubleProperty y = new SimpleDoubleProperty();
+				y.bind(parentStage.yProperty().add(
+						parentStage.widthProperty().subtract(inputDialog.widthProperty()).divide(2)));
+				
+				//Update dialog's x and y coordinate when x and y defined above changes
+				x.addListener(new ChangeListener<Number>(){
+					@Override
+					public void changed(ObservableValue<? extends Number> obs, Number oldValue, Number newValue){
+						inputDialog.setX(newValue.doubleValue());
+					}
+				});
+				
+				y.addListener(new ChangeListener<Number>(){
+					@Override
+					public void changed(ObservableValue<? extends Number> obs, Number oldValue, Number newValue){
+						inputDialog.setY(newValue.doubleValue());
+					}
+				});
+				
+				// Unbind x and y when dialog has been shown, to allow user to resize without interference
+		    inputDialog.setOnShown(new EventHandler<WindowEvent>() {
+		      @Override
+		      public void handle(WindowEvent event) {
+		        x.unbind();
+		        y.unbind();
+		      }
+		    });
+		    
+		    // Rebind x and y when dialog is hidden, so re-showing will properly center it again
+		    inputDialog.setOnHidden(new EventHandler<WindowEvent>() {
+		      @Override
+		      public void handle(WindowEvent event) {
+		        x.unbind();
+		        x.bind(parentStage.xProperty()
+		            .add(
+		                parentStage.widthProperty().subtract(inputDialog.widthProperty()).divide(2)
+		            )
+		        );
+		        y.unbind();
+		        y.bind(parentStage.yProperty()
+		            .add(
+		                parentStage.heightProperty().subtract(inputDialog.heightProperty()).divide(2)
+		            )
+		        );
+		      }
+		    });
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    
+    	if(type == FunctionType.ADD)
+    		_inputAddDialog = inputDialog;
+    	else if (type == FunctionType.DEL)
+    		_inputDelDialog = inputDialog;
+    	return inputDialog;
+    }
+    
+    public enum FunctionType { 
+    	ADD, DEL;
     }
     
     //LEAP-A 및 LEAP-B를 위한 코드 필요
