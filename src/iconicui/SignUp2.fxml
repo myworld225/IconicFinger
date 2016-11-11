@@ -12,7 +12,6 @@
 <?import javafx.scene.control.Label?>
 <?import java.net.URL?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="368.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iconicui.SignUpController">
    <children>
       <AnchorPane prefHeight="594.0" prefWidth="362.0" styleClass="top-segment" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0">
@@ -21,18 +20,18 @@
                     <children>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="userID" prefHeight="46.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="85.0" />
-                        <PasswordField fx:id="password" prefHeight="46.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="46.0" />
-                        <PasswordField fx:id="passwordCheck" onKeyPressed="#handleKeyPressed" onKeyReleased="#hadleKeyReleased" prefHeight="46.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="92.0" />
-                        <Button id="round-blue" fx:id="dupCheckButton" layoutX="277.0" mnemonicParsing="false" onAction="#checkDup" prefHeight="44.0" prefWidth="55.0" text="Button" />
-                        <Label fx:id="dupCheck" layoutX="225.0" layoutY="16.0" />
+                        <TextField fx:id="userID" prefHeight="46.0" styleClass="custom-text-field" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="85.0" />
+                        <PasswordField fx:id="password" prefHeight="46.0" styleClass="custom-text-field" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="46.0" />
+                        <PasswordField fx:id="passwordCheck" onKeyPressed="#handleKeyPressed" onKeyReleased="#hadleKeyReleased" prefHeight="46.0" styleClass="custom-text-field" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="92.0" />
+                        <Button id="round-blue" fx:id="dupCheckButton" layoutX="277.0" mnemonicParsing="false" onAction="#checkDup" prefHeight="44.0" prefWidth="55.0" text="Check" />
+                        <Label fx:id="dupCheck" layoutX="225.0" layoutY="16.0" opacity="0.0" />
                      </children>
                   </AnchorPane>
                     </children>
                 </VBox>
             <Button id="round-blue" fx:id="signUp" mnemonicParsing="false" onAction="#signUpButton" prefHeight="46.0" prefWidth="300.0" text="Sign Up" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
             <Button id="round-red" fx:id="back" mnemonicParsing="false" onAction="#backButton" prefHeight="46.0" text="Back" AnchorPane.bottomAnchor="94.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
-            <Label fx:id="pwCheck" layoutX="225.0" layoutY="357.0" />
+            <Label fx:id="pwCheck" layoutX="225.0" layoutY="357.0" opacity="0.0" />
                 <HBox alignment="CENTER" prefHeight="25.0" prefWidth="300.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
                     <children>
                         <Label fx:id="errorMessage" text="V 1.0" textFill="WHITE" />

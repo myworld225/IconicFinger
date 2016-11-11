@@ -64,6 +64,7 @@ public class SignUpController implements Initializable{
 		userID.setPromptText("ID");
 		password.setPromptText("PASSWORD");
 		passwordCheck.setPromptText("PASSWORD CHECK");
+		signUp.setDisable(true);//11-11추가
 	}
 	
 	public void setApp(MainApp application){
@@ -78,7 +79,7 @@ public class SignUpController implements Initializable{
 	    if (event.getCode() == KeyCode.ENTER) {
 	        // 엔터가 입력되면 회원 등록 절차가 시작 되게 된다.
 	    	// 체크해야 하는것: pw와 pw체크가 일치하는지? -- pwCheck 라벨의 값으로 측정 가능하다.
-	    	if(pwCheck.getText() == "correct")
+	    	if(pwCheck.getText() == "checked" && dupCheck.getText()=="checked" )
 	    		signUpButton();
 	    }
 	}
@@ -88,12 +89,24 @@ public class SignUpController implements Initializable{
 		String p1 = password.getText();
 	    String p2 = passwordCheck.getText();
 	    
-	    if(p1.equals(p2)){
+	    if(p1.equals(p2)){//둘다 노리끼리한 색으로 // 그렇지않으면 불그스름
 	    	pwCheck.setText("checked");
-	    	pwCheck.setTextFill(Color.GREEN);
+//	    	pwCheck.setTextFill(Color.GREEN);
+	    	//password.setStyle("-fx-background-color: #ffffcc;");
+//	    	password.setStyle("-fx-border-color: #ffffcc;");
+	    	passwordCheck.setStyle("-fx-background-color: transparent, #ffffff, transparent, #ffffcc;");
+	    	password.setStyle("-fx-background-color: transparent, #ffffff, transparent, #ffffcc;");
+	    	//11-11추가
+	    	if(dupCheck.getText() == "checked"){
+	    		signUp.setDisable(false);
+	    	}
 	    } else {
 	    	pwCheck.setText("incorrect");
-	    	pwCheck.setTextFill(Color.RED);
+	    	password.setStyle("-fx-background-color: transparent, #909090, transparent, #ffffff;");
+	    	signUp.setDisable(true);
+//	    	pwCheck.setTextFill(Color.RED);
+//	    	password.setStyle("-fx-background-color: #ffcccc;");
+	    	passwordCheck.setStyle("-fx-background-color: #ffcccc;");
 	    }
 	}
 	
@@ -106,10 +119,16 @@ public class SignUpController implements Initializable{
 		try {
 			if(dao.dupCheck(userID.getText())){
 				dupCheck.setText("checked");
-				dupCheck.setTextFill(Color.GREEN);
+//				dupCheck.setTextFill(Color.GREEN);
+				if(pwCheck.getText()=="checked"){
+					signUp.setDisable(false);
+				}
+				userID.setStyle("-fx-background-color: transparent, #ffffff, transparent, #ffffcc;");
 			}else{
 				dupCheck.setText("dup__ID");
-				dupCheck.setTextFill(Color.RED);
+				signUp.setDisable(true);
+//				dupCheck.setTextFill(Color.RED);
+				userID.setStyle("-fx-background-color: #ffcccc;");
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
