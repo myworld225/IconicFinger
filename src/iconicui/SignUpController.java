@@ -1,6 +1,5 @@
 package iconicui;
 
-import java.io.IOException;
 import java.net.Inet4Address;
 import java.net.URL;
 import java.net.UnknownHostException;
@@ -13,19 +12,15 @@ import iconicdata.MyUser;
 import iconicdata.MyUserDao;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -51,7 +46,11 @@ public class SignUpController implements Initializable{
     Label pwCheck;
     @FXML
     Label dupCheck;
-	
+    @FXML
+    Label errorMessage;
+    @FXML
+    ImageView _imageX;
+    
     //for db connection
     private MyUserDao dao;
     
@@ -65,6 +64,11 @@ public class SignUpController implements Initializable{
 		password.setPromptText("PASSWORD");
 		passwordCheck.setPromptText("PASSWORD CHECK");
 		signUp.setDisable(true);//11-11추가
+		//11-12추가 ( image에 툴팁 설치 후 보이지 않게 설정  )
+		errorMessage.setOpacity(0);
+		Tooltip.install(_imageX, new Tooltip("패스워드 오류"));
+		_imageX.setOpacity(0);
+		_imageX.setDisable(true);
 	}
 	
 	public void setApp(MainApp application){
@@ -83,31 +87,72 @@ public class SignUpController implements Initializable{
 	    		signUpButton();
 	    }
 	}
+	//아이디 중복 체크 버튼
+	@FXML
+	public void handleKeyPressed2(KeyEvent event){
+		if (event.getCode() == KeyCode.ENTER){
+			checkDup();
+		}
+	}
 	
 	@FXML
 	public void hadleKeyReleased(KeyEvent event){
 		String p1 = password.getText();
 	    String p2 = passwordCheck.getText();
 	    
-	    if(p1.equals(p2)){//둘다 노리끼리한 색으로 // 그렇지않으면 불그스름
+	    if(p1.equals(p2) && p1.length() >= 10){//둘다 노리끼리한 색으로 // 그렇지않으면 불그스름
 	    	pwCheck.setText("checked");
-//	    	pwCheck.setTextFill(Color.GREEN);
-	    	//password.setStyle("-fx-background-color: #ffffcc;");
-//	    	password.setStyle("-fx-border-color: #ffffcc;");
-	    	passwordCheck.setStyle("-fx-background-color: transparent, #ffffff, transparent, #ffffcc;");
-	    	password.setStyle("-fx-background-color: transparent, #ffffff, transparent, #ffffcc;");
+
+//	    	passwordCheck.setStyle("-fx-background-color: transparent, #ffffff, transparent, #ffffcc;");
+//	    	password.setStyle("-fx-background-color: transparent, #ffffff, transparent, #ffffcc;");
 	    	//11-11추가
 	    	if(dupCheck.getText() == "checked"){
 	    		signUp.setDisable(false);
 	    	}
+	    	errorMessage.setOpacity(0);
+	    	_imageX.setOpacity(0);
+	  		_imageX.setDisable(true);
 	    } else {
 	    	pwCheck.setText("incorrect");
-	    	password.setStyle("-fx-background-color: transparent, #909090, transparent, #ffffff;");
+//	    	password.setStyle("-fx-background-color: transparent, #909090, transparent, #ffffff;");
 	    	signUp.setDisable(true);
-//	    	pwCheck.setTextFill(Color.RED);
-//	    	password.setStyle("-fx-background-color: #ffcccc;");
-	    	passwordCheck.setStyle("-fx-background-color: #ffcccc;");
+
+//	    	passwordCheck.setStyle("-fx-background-color: #ffcccc;");
+	    	if(p1.length() < 10){
+	    		errorMessage.setText("비밀번호가 너무 짧습니다.");
+	    	} else {
+	    		errorMessage.setText("비밀번호가 일치하지 않습니다.");
+	    	}
+	    	errorMessage.setOpacity(1);
+	    	_imageX.setOpacity(1);
+	  		_imageX.setDisable(false);
+	  		
+	  		if(p2.length() == 0 && p1.length() >= 10){
+	  			errorMessage.setOpacity(0);
+		    	_imageX.setOpacity(0);
+		  		_imageX.setDisable(true);
+	  		}else if(p1.length() == 0 && p2.length() == 0){
+	  			errorMessage.setOpacity(0);
+		    	_imageX.setOpacity(0);
+		  		_imageX.setDisable(true);
+	  		}
 	    }
+	}
+	
+	//11-12 비밀번호 입력창 추가 함수
+	@FXML
+	public void handelKeyReleased2(KeyEvent event){
+		String p1 = password.getText();
+		if(p1.length() == 0){
+			errorMessage.setOpacity(0);
+			_imageX.setOpacity(0);
+  		_imageX.setDisable(true);
+		} else if (p1.length() < 10 || p1.length() > 20){
+			errorMessage.setText("비밀번호가 너무 짧습니다.");
+			errorMessage.setOpacity(1);
+		} else {
+			errorMessage.setOpacity(0);
+		}
 	}
 	
 	//check button : db에서 해당 아이디 중복 확인
