@@ -6,7 +6,11 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.stage.Stage;
-
+/**
+ * 해당 노드에 Draggable 속성을 부여하는 클래스
+ * @author Root
+ * 
+ */
 public class DraggableFactory {
 	
 	private static class Delta {

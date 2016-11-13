@@ -10,7 +10,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import iconicdata.Authenticator;
 import iconicdata.MyUser;
@@ -26,7 +25,7 @@ import customdialog.DraggableFactory;
 
 /**
  * Created by user on 2016-09-25.
- * 전체를 관장하는 메인 클래스
+ * 메인 클래스(화면 전환을 담당)
  */
 
 
@@ -46,7 +45,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) throws Exception {
     		window = primaryStage;
     		
-    		Image image = new Image("file:../../img/ud.png");
+    		Image image = new Image("file:../../img/icon.png");
     		primaryStage.getIcons().addAll(image);
     		
         primaryStage.initStyle(StageStyle.UNDECORATED);

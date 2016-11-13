@@ -8,7 +8,12 @@ import javafx.scene.control.Label;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
-//팝업 다이얼로그를 생성하는 클래스
+/**
+ * 에러용 팝업 메뉴 생성 클래스
+ * 사용되는 fxml파일 : errorpopup.fxml
+ * @author Root
+ *
+ */
 
 public class ErrorPopup {
 	public static void showPopup(Stage stage, String text){
@@ -22,7 +27,7 @@ public class ErrorPopup {
 			parent = FXMLLoader.load(ErrorPopup.class.getResource("errorpopup.fxml"));
 			Label lblMessage = (Label)parent.lookup("#lblMessage");
   		lblMessage.setText(text);
-  		//그냥 항상 메뉴쪽에 뜨게 하자... 보기 쉽게?
+  		//그냥 항상 메뉴쪽에 뜨게 한다.
 //  		double x = stage.getX()+stage.getWidth()/2 - popup.getWidth()/2;
 //  		double y = stage.getY()+stage.getHeight()/2 - popup.getHeight()/2;
 //  		System.out.println("(x, y) : "+x+", " + y);

@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import iconicdata.FriendListDao;
 import iconicdata.MySqlConnectionMaker;
 import javafx.collections.ObservableList;
@@ -14,7 +16,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
+/**
+ * DialogController
+ * MainMenu에서 friend add/del 기능에 사용되는 컨트롤러 클래스
+ * 사용되는 fxml파일 : blackinputdialog.fxml
+ * */
 public class DialogController implements Initializable {
 
 	@FXML
@@ -65,14 +71,22 @@ public class DialogController implements Initializable {
 
 				// 창을 닫고 성공 팝업메시지를 띄우자 느낌표 아이콘 필요
 			} catch (ClassNotFoundException e) {
+				
 				// 실패 메시지 팝업 (x 아이콘)
 				System.out.println("ClassNotFoundException");
 				ErrorPopup.showPopup(pStage, "ClassNotFound");
 				e.printStackTrace();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
+				//이미 친구 추가되어있고 mylist에는 없다면 추가 해준다 ( 이 경우는 상대가 먼저 친구 추가 했지만 내 ui에는 업데이트 되지 않은 경우 )
+				if (e instanceof MySQLIntegrityConstraintViolationException){
+					System.out.println("integrityConstraint");
+					if (!mylist.contains(fid)){
+						mylist.add(fid);
+					}
+				}
 				System.out.println("SQLException");
-				ErrorPopup.showPopup(pStage, "잘못된 만남");
+				ErrorPopup.showPopup(pStage, "DB 오류");
 				e.printStackTrace();
 			}
 		}

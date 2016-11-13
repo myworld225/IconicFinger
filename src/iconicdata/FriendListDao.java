@@ -5,9 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
+/**
+ * FriendList 테이블에 대한 DAO
+ * @author Root
+ *
+ */
 public class FriendListDao {
 	private ConnectionMaker connectionMaker;
 

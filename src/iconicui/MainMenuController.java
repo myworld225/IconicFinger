@@ -34,8 +34,8 @@ import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 /**
- * Created by user on 2016-09-25.
- * 추가해야 할 것들 : 각 버튼에대한 행동처리 대부분은 MainApp에서 처리하게 된다.(위임?)
+ * MainMenu를  담당하는 컨트롤러
+ * 사용되는 fxml : MainMenu2.fxml
  */
 public class MainMenuController implements Initializable {
 		
@@ -136,87 +136,6 @@ public class MainMenuController implements Initializable {
     	final Stage dialog = createDialog(myStage,FunctionType.DEL);
     	dialog.show();
     }
-    
-//    @FXML
-//    public void addFriend(){
-//    	//내 스테이지를 얻고, 이것을 owner로 하는 stage생성
-//    	Stage myStage = (Stage)close.getScene().getWindow();
-//    	Stage dialogStage = new Stage(StageStyle.UNDECORATED);
-//    	dialogStage.initModality(Modality.WINDOW_MODAL);
-//    	dialogStage.initOwner(myStage);
-//    	
-//    	FXMLLoader loader = new FXMLLoader();
-//    	loader.setLocation(MainController.class.getResource("../customdialog/blackinputdialog.fxml"));
-//    	try {
-//				Parent parent = loader.load();
-//				//DialogController로 내부에서 필요한 정보인 observablelist의 레퍼런스와 userid/name 을 획득한다.
-//				DialogController dialogController = (DialogController)loader.getController();
-//				dialogController.setParentStage(myStage);
-//				dialogController.setList(items);
-//				dialogController.setUserName(application.getLoggedUser().getId());
-//				dialogController.setButtonText("Add");
-//				DraggableFactory.makeDraggable(dialogStage, parent);
-//				
-//				
-//				Scene scene = new Scene(parent);
-//				dialogStage.setScene(scene);
-//				dialogStage.setResizable(false);
-//				
-//				//좌표생성 코드
-//				//Desired x coordinate for centered dialog
-//				final DoubleProperty x = new SimpleDoubleProperty();
-//				x.bind(myStage.xProperty().add(
-//						myStage.widthProperty().subtract(dialogStage.widthProperty()).divide(2)));
-//				//Desired y coordinate for centered dialog
-//				final DoubleProperty y = new SimpleDoubleProperty();
-//				y.bind(myStage.yProperty().add(
-//						myStage.widthProperty().subtract(dialogStage.widthProperty()).divide(2)));
-//				
-//				
-//				
-//				//
-//				dialogStage.showAndWait();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//    	
-//    	
-//    	
-//    } // database update action + observable array edit
-//    
-//    //ㅌㅔ 스트 필요
-//    @FXML
-//    public void delFriend(){
-//    //내 스테이지를 얻고, 이것을 owner로 하는 stage생성
-//    	Stage myStage = (Stage)close.getScene().getWindow();
-//    	Stage dialogStage = new Stage(StageStyle.UNDECORATED);
-//    	dialogStage.initModality(Modality.WINDOW_MODAL);
-//    	dialogStage.initOwner(myStage);
-//    	
-//    	FXMLLoader loader = new FXMLLoader();
-//    	loader.setLocation(MainController.class.getResource("../customdialog/blackinputdialog.fxml"));
-//    	try {
-//				Parent parent = loader.load();
-//				//DialogController로 내부에서 필요한 정보인 observablelist의 레퍼런스와 userid/name 을 획득한다.
-//				DialogController dialogController = (DialogController)loader.getController();
-//				dialogController.setParentStage(myStage);
-//				dialogController.setList(items);
-//				dialogController.setUserName(application.getLoggedUser().getId());
-//				dialogController.setButtonText("Del");
-//				DraggableFactory.makeDraggable(dialogStage, parent);
-//				
-//				
-//				Scene scene = new Scene(parent);
-//				
-//				dialogStage.setScene(scene);
-//				dialogStage.setResizable(false);
-//				dialogStage.showAndWait();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//    }
     
     @FXML
     public void logOut(){

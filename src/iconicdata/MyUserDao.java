@@ -6,7 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+/**
+ * User 테이블에 대한 DAO
+ * @author Root
+ *
+ */
 //CRUD OPERATIONS
 public class MyUserDao {
 	

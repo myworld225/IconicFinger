@@ -25,7 +25,8 @@ import java.util.ResourceBundle;
 import customdialog.ErrorPopup;
 
 /**
- * 11/06 undecorator 세팅
+ * 로그인 화면을 담당하는 컨트롤러
+ * 사용되는 fxml : Login2.fxml
  */
 public class LoginController implements Initializable{
 
